@@ -1,9 +1,6 @@
 package com.yrc.common.pojo.ffmpeg.input
 
 import com.yrc.common.pojo.ffmpeg.FFmpegConfigItem
-import org.valiktor.functions.isNotBlank
-import org.valiktor.functions.isNotNull
-import org.valiktor.validate
 
 data class FFmpegInputDto(var inputUri: String? = null, var rate: Boolean? = true) : FFmpegConfigItem{
     companion object {
@@ -11,12 +8,6 @@ data class FFmpegInputDto(var inputUri: String? = null, var rate: Boolean? = tru
         private const val INPUT_URI_OPTION = "-i"
         fun getDefaultRateInput(inputUri: String): FFmpegInputDto {
             return FFmpegInputDto(inputUri)
-        }
-    }
-    init {
-        validate(this) {
-            validate(FFmpegInputDto::inputUri).isNotBlank()
-            validate(FFmpegInputDto::rate).isNotNull()
         }
     }
     override fun toList(): List<String> {

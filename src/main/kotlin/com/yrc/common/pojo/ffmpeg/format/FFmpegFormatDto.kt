@@ -3,8 +3,6 @@ package com.yrc.common.pojo.ffmpeg.format
 import com.yrc.common.pojo.ffmpeg.FFmpegConfigItem
 import com.yrc.common.pojo.ffmpeg.format.FFmpegFormatType.FLV
 import com.yrc.common.pojo.ffmpeg.format.FFmpegFormatType.HLS
-import org.valiktor.functions.isNotNull
-import org.valiktor.validate
 
 data class FFmpegFormatDto(var formatType: FFmpegFormatType? = null,
                            var hlsInitTime: Int? = null,
@@ -39,11 +37,6 @@ data class FFmpegFormatDto(var formatType: FFmpegFormatType? = null,
         }
         fun getDefaultFlvFormat(): FFmpegFormatDto{
             return FFmpegFormatDto(FLV)
-        }
-    }
-    init {
-        validate(this) {
-            validate(FFmpegFormatDto::formatType).isNotNull()
         }
     }
 

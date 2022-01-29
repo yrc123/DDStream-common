@@ -1,20 +1,21 @@
 package com.yrc.common.pojo.ffmpeg
 
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.yrc.common.pojo.ffmpeg.encode.FFmpegAudioCodecDto
 import com.yrc.common.pojo.ffmpeg.encode.FFmpegVideoCodecDto
 import com.yrc.common.pojo.ffmpeg.format.FFmpegFormatDto
 import com.yrc.common.pojo.ffmpeg.input.FFmpegInputDto
 import com.yrc.common.pojo.ffmpeg.output.FFmpegOutputDto
 import com.yrc.common.pojo.ffmpeg.proxy.FFmpegProxyDto
-import org.valiktor.functions.isNotNull
-import org.valiktor.validate
 
-data class FFmpegConfigDto (var ffmpegProxy: FFmpegProxyDto?,
-                            var ffmpegInput: FFmpegInputDto?,
-                            var ffmpegAudioCodec: FFmpegAudioCodecDto?,
-                            var ffmpegVideoCodec: FFmpegVideoCodecDto?,
-                            var ffmpegFormat: FFmpegFormatDto?,
-                            var ffmpegOutput: FFmpegOutputDto?) : FFmpegConfigItem{
+data class FFmpegConfigDto
+@JsonCreator constructor(@JsonProperty("ffmpegProxy")var ffmpegProxy: FFmpegProxyDto?,
+                         @JsonProperty("ffmpegInput")var ffmpegInput: FFmpegInputDto?,
+                         @JsonProperty("ffmpegAudioCodec") var ffmpegAudioCodec: FFmpegAudioCodecDto?,
+                         @JsonProperty("ffmpegVideoCodec") var ffmpegVideoCodec: FFmpegVideoCodecDto?,
+                         @JsonProperty("ffmpegFormat") var ffmpegFormat: FFmpegFormatDto?,
+                         @JsonProperty("ffmpegOutput") var ffmpegOutput: FFmpegOutputDto?) : FFmpegConfigItem{
     companion object {
         fun getDefaultConfig(inputUri: String, outputUri: String): FFmpegConfigDto{
             return FFmpegConfigDto(
@@ -24,16 +25,6 @@ data class FFmpegConfigDto (var ffmpegProxy: FFmpegProxyDto?,
                 FFmpegVideoCodecDto.getCopyCodec(),
                 FFmpegFormatDto.getDefaultHlsFormat(),
                 FFmpegOutputDto.getDefaultOutput(outputUri))
-        }
-    }
-    init {
-        validate(this) {
-            validate(FFmpegConfigDto::ffmpegProxy).isNotNull()
-            validate(FFmpegConfigDto::ffmpegInput).isNotNull()
-            validate(FFmpegConfigDto::ffmpegAudioCodec).isNotNull()
-            validate(FFmpegConfigDto::ffmpegVideoCodec).isNotNull()
-            validate(FFmpegConfigDto::ffmpegFormat).isNotNull()
-            validate(FFmpegConfigDto::ffmpegOutput).isNotNull()
         }
     }
 
