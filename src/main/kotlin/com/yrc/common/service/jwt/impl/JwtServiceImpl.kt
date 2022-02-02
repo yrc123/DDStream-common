@@ -1,7 +1,6 @@
 package com.yrc.common.service.jwt.impl
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.yrc.common.pojo.common.ResponseDto
 import com.yrc.common.service.jwt.JwtKeyProvider
 import com.yrc.common.service.jwt.JwtService
 import io.jsonwebtoken.Claims
@@ -21,12 +20,12 @@ class JwtServiceImpl(
         const val HASH_NAME = "hash"
     }
 
-    override fun<T> encode(response: ResponseDto<T>,
-                           expirationTime: Long,
-                           issuer: String
+    override fun encode(data: Any,
+                        expirationTime: Long,
+                        issuer: String,
+                        time: Date
     ): String {
-        val time = response.time
-        val hash = DigestUtils.md5Hex(mapper.writeValueAsString(response.data))
+        val hash = DigestUtils.md5Hex(mapper.writeValueAsString(data))
         val jws = Jwts.builder()
             .setExpiration(Date(time.time + expirationTime))
             .setIssuer(issuer)
@@ -38,13 +37,15 @@ class JwtServiceImpl(
         return jws
 
     }
-    override fun<T> decode(response: ResponseDto<T>, skewSeconds: Long): Jws<Claims> {
+
+
+    override fun decode(data: Any, jws: String, skewSeconds: Long): Jws<Claims> {
         val claimsJws = Jwts.parserBuilder()
             .setSigningKey(jwtKeyProvider.getPublicKey())
             .setAllowedClockSkewSeconds(skewSeconds)
             .build()
-            .parseClaimsJws(response.jwt.jws)
-        val hash = DigestUtils.md5Hex(mapper.writeValueAsString(response.data))
+            .parseClaimsJws(jws)
+        val hash = DigestUtils.md5Hex(mapper.writeValueAsString(data))
         val dataHash: String? = claimsJws.body[HASH_NAME] as String?
         if (dataHash == null) {
             TODO("抛出异常")

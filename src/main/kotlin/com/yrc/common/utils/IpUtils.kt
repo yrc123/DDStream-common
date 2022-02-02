@@ -6,8 +6,8 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.URL
 
-object IpUtil {
-    var logger = LogFactory.getLog(IpUtil::class.java)
+object IpUtils {
+    var logger = LogFactory.getLog(IpUtils::class.java)
     private val ipApiList = listOf<String>(
         "https://checkip.amazonaws.com",
         "https://ip.42.pl/raw"
