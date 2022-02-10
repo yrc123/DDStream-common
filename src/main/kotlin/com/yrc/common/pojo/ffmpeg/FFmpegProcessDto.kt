@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 
 data class FFmpegProcessDto(val id: String,
                             val name: String,
-                            val config: FFmpegConfigItem,
+                            val config: FFmpegConfigItem?,
+                            val advancedConfig: List<String>?,
                             var alive: Boolean,
                             @get:JsonIgnore
                             var process: Process?
