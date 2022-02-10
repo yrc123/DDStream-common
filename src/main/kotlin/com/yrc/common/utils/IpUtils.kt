@@ -1,6 +1,6 @@
 package com.yrc.common.utils
 
-import com.yrc.common.exception.IpNotGetException
+import com.yrc.common.exception.ip.IpNotGetExcetption
 import org.apache.commons.logging.LogFactory
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -8,7 +8,7 @@ import java.net.URL
 
 object IpUtils {
     var logger = LogFactory.getLog(IpUtils::class.java)
-    private val ipApiList = listOf<String>(
+    private val ipApiList = listOf(
         "https://checkip.amazonaws.com",
         "https://ip.42.pl/raw"
     )
@@ -25,6 +25,6 @@ object IpUtils {
             }
             logger.warn("通过 ${ipApiList[i]} 获取公网ip失败")
         }
-        throw IpNotGetException()
+        throw IpNotGetExcetption()
     }
 }

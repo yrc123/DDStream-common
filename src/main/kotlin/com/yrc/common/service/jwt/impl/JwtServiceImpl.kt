@@ -1,6 +1,7 @@
 package com.yrc.common.service.jwt.impl
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.yrc.common.exception.common.ParametersMissingExceptionFactory
 import com.yrc.common.service.jwt.JwtKeyProvider
 import com.yrc.common.service.jwt.JwtService
 import io.jsonwebtoken.Claims
@@ -48,9 +49,10 @@ class JwtServiceImpl(
         val hash = DigestUtils.md5Hex(mapper.writeValueAsString(data))
         val dataHash: String? = claimsJws.body[HASH_NAME] as String?
         if (dataHash == null) {
-            TODO("抛出异常")
+            throw ParametersMissingExceptionFactory
+                .getHeaderParametersMissingException(listOf(HASH_NAME))
         } else if (!hash.equals(dataHash)){
-            throw SignatureException("")
+            throw SignatureException("data hash not equals")
         }
         return claimsJws
     }

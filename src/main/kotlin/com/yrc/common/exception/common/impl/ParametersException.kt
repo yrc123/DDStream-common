@@ -1,0 +1,29 @@
+package com.yrc.common.exception.common.impl
+
+import com.yrc.common.exception.common.CommonException
+
+class ParametersException(
+    private val code: Int,
+    private val part: String,
+    private val keyValuePairs: List<Pair<String, Any?>>,
+    message: String
+) : CommonException(message){
+
+     private val _reason by lazy {
+        val sb = StringBuffer().append("[")
+        keyValuePairs.forEach {
+            sb.append("[key: ${it.first}, value: ${it.second}]")
+        }
+        sb.append("]")
+        sb.toString()
+    }
+
+    override fun getReason(): String {
+        return _reason
+    }
+
+    override fun getCode(): Int {
+        return code
+    }
+
+}
