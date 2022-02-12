@@ -26,7 +26,9 @@ object ResponseUtils {
     fun successStringResponse(message: String = "success"): ResponseDto<String>{
         return getResponse(message, message, SUCESS_CODE)
     }
-    data class ExceptionData(val code: Int, val message: String, val reason: String){
+    data class ExceptionData(var code: Int? = null,
+                             var message: String? = null,
+                             var reason: String? = null){
         constructor(e: CommonException) : this(e.getCode(), e.message ?: "", e.getReason())
     }
 
