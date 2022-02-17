@@ -2,7 +2,7 @@ package com.yrc.common.exception.common.impl
 
 import com.yrc.common.exception.common.CommonException
 
-class ParametersException(
+open class ParametersException(
     private val code: Int,
     private val part: String,
     private val keyValuePairs: List<Pair<String, Any?>>,
