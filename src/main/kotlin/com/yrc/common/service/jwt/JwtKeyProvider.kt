@@ -6,4 +6,5 @@ import java.security.PublicKey
 interface JwtKeyProvider {
     fun getPrivateKey(): PrivateKey
     fun getPublicKey(): PublicKey
+    fun reset()
 }
