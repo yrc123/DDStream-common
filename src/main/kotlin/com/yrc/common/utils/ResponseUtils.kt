@@ -31,8 +31,9 @@ object ResponseUtils {
     }
     data class ExceptionData(var code: Int? = null,
                              var message: String? = null,
-                             var reason: String? = null){
-        constructor(e: CommonException) : this(e.getCode(), e.message ?: "", e.getReason())
+                             var reason: String? = null,
+                             var extendCode: Int? = null){
+        constructor(e: CommonException) : this(e.getCode(), e.message ?: "", e.getReason(), e.getExtendCode())
     }
 
 }

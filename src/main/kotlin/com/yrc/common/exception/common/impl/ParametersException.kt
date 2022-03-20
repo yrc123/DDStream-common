@@ -6,7 +6,8 @@ open class ParametersException(
     private val code: Int,
     private val part: String,
     private val keyValuePairs: List<Pair<String, Any?>>,
-    message: String
+    message: String,
+    private val extendCode: Int = -1,
 ) : CommonException(message){
 
      private val _reason by lazy {
@@ -24,6 +25,10 @@ open class ParametersException(
 
     override fun getCode(): Int {
         return code
+    }
+
+    override fun getExtendCode(): Int {
+        return extendCode
     }
 
 }
