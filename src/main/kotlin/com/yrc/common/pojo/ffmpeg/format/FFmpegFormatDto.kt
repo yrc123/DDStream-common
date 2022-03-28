@@ -1,7 +1,6 @@
 package com.yrc.common.pojo.ffmpeg.format
 
 import com.yrc.common.pojo.ffmpeg.FFmpegConfigItem
-import com.yrc.common.pojo.ffmpeg.format.FFmpegFormatType.FLV
 import com.yrc.common.pojo.ffmpeg.format.FFmpegFormatType.HLS
 
 data class FFmpegFormatDto(var formatType: FFmpegFormatType? = null,
@@ -34,9 +33,6 @@ data class FFmpegFormatDto(var formatType: FFmpegFormatType? = null,
                 hlsListSize,
                 hlsDeleteThreshold,
                 ffmpegHlsFlags)
-        }
-        fun getDefaultFlvFormat(): FFmpegFormatDto{
-            return FFmpegFormatDto(FLV)
         }
     }
 
