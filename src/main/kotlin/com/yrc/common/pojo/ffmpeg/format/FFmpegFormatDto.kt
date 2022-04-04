@@ -2,6 +2,7 @@ package com.yrc.common.pojo.ffmpeg.format
 
 import com.yrc.common.pojo.ffmpeg.FFmpegConfigItem
 import com.yrc.common.pojo.ffmpeg.format.FFmpegFormatType.HLS
+import com.yrc.common.pojo.ffmpeg.format.FFmpegFormatType.NONE
 
 data class FFmpegFormatDto(var formatType: FFmpegFormatType? = null,
                            var hlsInitTime: Int? = null,
@@ -39,6 +40,9 @@ data class FFmpegFormatDto(var formatType: FFmpegFormatType? = null,
     override fun toList(): List<String> {
         return ArrayList<String>().apply {
             when(formatType!!) {
+                NONE -> {
+                    addAll(listOf())
+                }
                 HLS -> {
                     if (hlsInitTime != null) {
                         addAll(listOf(HLS_INIT_TIME_OPTION, hlsInitTime.toString()))
