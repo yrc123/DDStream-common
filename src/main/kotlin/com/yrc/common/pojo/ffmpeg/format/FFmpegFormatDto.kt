@@ -62,10 +62,12 @@ data class FFmpegFormatDto(var formatType: FFmpegFormatType? = null,
                             add(it.flagName)
                         }
                     }
+                    addAll(listOf(FORMAT_OPTION, formatType!!.typeName))
                 }
-                else -> {}
+                else -> {
+                    addAll(listOf(FORMAT_OPTION, formatType!!.typeName))
+                }
             }
-            addAll(listOf(FORMAT_OPTION, formatType!!.typeName))
         }
     }
 }
