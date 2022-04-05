@@ -1,6 +1,7 @@
 package com.yrc.common.pojo.ffmpeg
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.zaxxer.nuprocess.NuProcess
 import org.valiktor.functions.hasSize
 import org.valiktor.functions.isNotNull
 import org.valiktor.validate
@@ -12,7 +13,7 @@ data class FFmpegProcessDto(
     var advancedConfig: List<String>? = null,
     var alive: Boolean? = null,
     @get:JsonIgnore
-    var process: Process? = null
+    var process: NuProcess? = null
 ) {
     companion object {
         const val NAME_MAX = 64
