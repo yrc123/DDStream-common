@@ -4,5 +4,6 @@ enum class FFmpegFormatType(val typeName: String) {
     NONE("none"),
     FLV("flv"),
     HLS("hls"),
-    DASH("dash")
+    DASH("dash"),
+    MP4("mp4"),
 }
